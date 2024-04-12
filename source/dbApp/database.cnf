@@ -1,0 +1,6 @@
+# my.cnf
+[client]
+database = db_sistema
+user = root
+password = MyP455w0rd
+default-character-set = utf8

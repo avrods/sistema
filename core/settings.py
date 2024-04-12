@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-+)zgt@a5(bcr8k9z=a!o1&g*zlbo$@*(5i_s3l+-_-1+n^ovu!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['codigo.sbs','www.codigo.sbs','173.255.228.54','2600:3c03::f03c:94ff:fe40:63d']
-CSRF_TRUSTED_ORIGINS = ['https://codigo.sbs','https://www.codigo.sbs']
+ALLOWED_HOSTS = ['pay.codigo.sbs','159.223.171.199']
+CSRF_TRUSTED_ORIGINS = ['https://pay.codigo.sbs']
 
 AUTH_USER_MODEL = 'userApp.CustomUser'
 
@@ -91,15 +91,24 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # }
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_sistema',
-        'USER': 'codigo',
-        'PASSWORD': 'us3r@us3r.com',
-        'HOST': 'localhost',
-        'PORT': '5432',
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "OPTIONS": {
+            "read_default_file": "/root/friday/value/sistema/source/dbApp/database.cnf",
+        },
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'db_sistema',
+#         'USER': 'codigo',
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
@@ -139,7 +148,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    "/var/www/html/sistema/static/",
+    "/root/friday/value/sistema/static/",
 ]
 
 # Default primary key field type
