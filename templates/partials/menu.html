@@ -1,0 +1,11 @@
+<!-- Navbar menu content here -->
+{% if request.user.is_authenticated %}
+<li><a class="py-3 bg-neutral hover:bg-gray-800 text-white" href="{% url 'systemApp:dashboard' %}">Panel de Administración</a></li>
+{% else %}
+<li><a class="py-3" href="{% url 'webApp:home' %}">Inicio</a></li>
+<li><a class="py-3" href="{% url 'webApp:modules' %}">Modulos</a></li>
+<li><a class="py-3" href="{% url 'webApp:price' %}">Precios</a></li>
+<li><a class="py-3" href="{% url 'webApp:help' %}">Ayuda</a></li>
+<li><a class="py-3" href="{% url 'userApp:signup' %}">Registarse</a></li>
+<li><a class="py-3" href="{% url 'userApp:signin' %}">Iniciar Sesión</a></li>
+{% endif %}

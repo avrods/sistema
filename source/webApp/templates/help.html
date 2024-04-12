@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<section class="lg:w-5/6 mx-auto">
+    <div class="my-4">
+        <h1 class="text-xl font-semibold">{{ title }}</h1>
+        <div class="join join-vertical w-full bg-white my-10">
+            <div class="collapse collapse-arrow join-item border border-base-300">
+                <input type="radio" name="my-accordion-4" checked="checked" />
+                <div class="collapse-title text-xl font-medium">
+                    ¿Cuales son los beneficios de nuestro sistema administrativo de empresa?
+                </div>
+                <div class="collapse-content">
+                    <p class="text-gray-500">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Molestias obcaecati necessitatibus nihil.</p>
+                </div>
+            </div>
+            <div class="collapse collapse-arrow join-item border border-base-300">
+                <input type="radio" name="my-accordion-4" />
+                <div class="collapse-title text-xl font-medium">
+                    Click to open this one and close others
+                </div>
+                <div class="collapse-content">
+                    <p>hello</p>
+                </div>
+            </div>
+            <div class="collapse collapse-arrow join-item border border-base-300">
+                <input type="radio" name="my-accordion-4" />
+                <div class="collapse-title text-xl font-medium">
+                    Click to open this one and close others
+                </div>
+                <div class="collapse-content">
+                    <p>hello</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

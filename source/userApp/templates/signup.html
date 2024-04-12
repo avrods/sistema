@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<section class="lg:w-5/6 mx-auto">
+    <div class="my-4">
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title">{{ title }}</h2>
+                <form action="." method="post">
+                    {% csrf_token %}
+                    <div class="grid lg:grid-cols-3 gap-4">
+                        {% for field in form %}
+                        <div>
+                            <label class="form-control w-full mb-2" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                            {% for error in field.errors %}
+                            <small class="text-danger">{{ error }}</small>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="card-actions justify-end content-end mt-8">
+                        <a class="btn btn-link" href="{% url 'userApp:signin' %}">Iniciar Sesión</a>
+                        <button type="submit" class="btn btn-neutral">{{ title }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

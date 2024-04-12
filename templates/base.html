@@ -1,0 +1,28 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="light" class="bg-gray-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/app.min.css' %}" />
+    <!-- DaisyUI CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="drawer">
+        <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+        <div class="drawer-content">
+            <main class="flex flex-col">
+                {% include 'partials/header.html' %}
+            </main>
+            <div class="px-4">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+        {% include 'partials/sidebar.html' %}
+    </div>
+</body>
+</html>
