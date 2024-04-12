@@ -44,7 +44,7 @@ def edit_superuser(request):
         form = SuperUserChangeForm(instance=request.user)
 
     context = {
-        'title': 'Editar SuperUsuario',
+        'title': 'Editar Super Usuario',
         'form': form
     }
     return render(request, 'user-edit.html', context)  

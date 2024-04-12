@@ -7,30 +7,33 @@
 {% block content %}
 <section class="lg:w-5/6 mx-auto">
   <div class="my-4">
-    <div>
-      <form action="." method="post">
-        {% csrf_token %}
-        <div class="grid lg:grid-cols-3 gap-4">
-          {% for field in form %}
-          <div>
-            <label class="form-control w-full mb-2" for="{{ field.id_for_label }}">{{ field.label }}</label>
-            <div class="input-group">
-              {{ field }}
-              {% if field.help_text %}
-              <small class="form-text text-muted">{{ field.help_text }}</small>
-              {% endif %}
-              {% for error in field.errors %}
-              <small class="text-danger">{{ error }}</small>
-              {% endfor %}
-            </div>
+      <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+              <h2 class="card-title">{{ title }}</h2>
+              <form action="." method="post">
+                {% csrf_token %}
+                <div class="grid lg:grid-cols-3 gap-4">
+                  {% for field in form %}
+                  <div>
+                    <label class="form-control w-full mb-2" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    <div class="input-group">
+                      {{ field }}
+                      {% if field.help_text %}
+                      <small class="form-text text-muted">{{ field.help_text }}</small>
+                      {% endif %}
+                      {% for error in field.errors %}
+                      <small class="text-danger">{{ error }}</small>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+                <div class="card-actions justify-end content-end">
+                    <button type="submit" class="btn btn-neutral">{{ title }}</button>
+                </div>
+              </form>
           </div>
-          {% endfor %}
-        </div>
-        <div class="grid justify-start mt-6">
-          <button type="submit" class="btn btn-neutral">{{ title }}</button>
-        </div>
-      </form>
-    </div>
+      </div>
   </div>
 </section>
 {% endblock %}
