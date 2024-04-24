@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+{% include 'partials/header.html' %}
 <section class="lg:w-5/6 mx-auto">
     <div class="my-4">
         <h1 class="text-xl font-semibold">{{ title }}</h1>
@@ -12,7 +13,7 @@
     </div>
 
     <!-- You can open the modal using ID.showModal() method -->
-    <button class="btn btn-neutral" onclick="my_modal_4.showModal()">Comprar {{ title }}</button>
+    <button class="btn btn-neutral" onclick="my_modal_4.showModal()">Crear nueva empresa</button>
     <dialog id="my_modal_4" class="modal">
         <div class="modal-box w-11/12 max-w-5xl">
             <h3 class="font-bold text-lg">Llenar el siguiente formulario.</h3>
@@ -66,4 +67,5 @@
         </div>
     </dialog>
 </section>
+{% include 'partials/footer.html' %}
 {% endblock %}

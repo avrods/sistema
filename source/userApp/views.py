@@ -41,7 +41,7 @@ def SignIn(request):
         form = CustomAuthenticationForm()
 
     context = {
-        'title': 'Iniciar sesión',
+        'title': 'Iniciar Sesión',
         'form': form,
     }
     return render(request, 'signin.html', context)
