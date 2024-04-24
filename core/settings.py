@@ -25,8 +25,8 @@ SECRET_KEY = 'django-insecure-+)zgt@a5(bcr8k9z=a!o1&g*zlbo$@*(5i_s3l+-_-1+n^ovu!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['pay.codigo.sbs','159.223.171.199']
-CSRF_TRUSTED_ORIGINS = ['https://pay.codigo.sbs']
+ALLOWED_HOSTS = ['datos.cam','www.datos.cam','45.79.170.160','2600:3c03::f03c:94ff:feb6:230d']
+CSRF_TRUSTED_ORIGINS = ['https://datos.cam','https://www.datos.cam']
 
 AUTH_USER_MODEL = 'userApp.CustomUser'
 
@@ -64,7 +64,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [ BASE_DIR / 'templates' ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'source/dbApp/db.sqlite3',
+        'NAME': BASE_DIR / 'source/dbApp/dev.sqlite3',
     }
 }
 
@@ -94,7 +94,7 @@ DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.mysql",
 #         "OPTIONS": {
-#             "read_default_file": "/root/friday/value/sistema/source/dbApp/database.cnf",
+#             "read_default_file": "dbApp/prod.cnf",
 #         },
 #     }
 # }
@@ -148,7 +148,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    "/root/friday/value/sistema/static/",
+    # "/www/static/",
 ]
 
 # Default primary key field type
