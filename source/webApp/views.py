@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 def Home(request):
     context = {
-        'title': 'Sistema Administración',
+        'title': 'Sistema Administración Contable',
     }
     return render(request, 'home.html', context)
 

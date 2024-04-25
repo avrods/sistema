@@ -14,15 +14,17 @@
                     {% csrf_token %}
                     <div class="grid lg:grid-cols-3 gap-4">
                         {% for field in form %}
-                        <div>
-                            <label class="form-control w-full mb-2" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        <label class="form-control w-full">
+                            <div class="label">
+                                <span class="label-text" for="{{ field.id_for_label }}">{{ field.label }}</span>
+                            </div>
                             {{ field }}
                             {% if field.errors %}
                             {% for error in field.errors %}
                             <small class="text-danger">{{ error }}</small>
                             {% endfor %}
                             {% endif %}
-                        </div>
+                        </label>
                         {% endfor %}
                     </div>
                     <div class="card-actions justify-end content-end mt-8">
