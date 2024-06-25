@@ -1339,3 +1339,108 @@ from django.contrib.auth import update_session_auth_hash
 ```
 
 Después de agregar la línea de importación, reinicia el servidor de Django para que los cambios surtan efecto. Ahora, la función `update_session_auth_hash` debería estar definida y no deberías ver el error `NameError`.
+
+
+
+
+### codigo para reconocer si estoy logueado como superadmin me nuestre del menu el item precios
+
+Para mostrar el item "Precios" en el menú solo cuando estés logueado como superadmin, debes agregar una condición en la plantilla HTML del menú. Aquí te muestro cómo hacerlo:
+
+Suponiendo que tienes un menú en tu plantilla `base.html` o en una plantilla parcial, debes agregar la siguiente condición alrededor del elemento de menú que deseas mostrar solo para superadmins:
+
+```html
+{% if request.user.is_superuser %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'precios' %}">Precios</a>
+  </li>
+{% endif %}
+```
+
+Asegúrate de que la plantilla donde coloques esta condición extienda de `base.html` y que el bloque donde se encuentra el menú esté dentro de un bloque `{% block content %}{% endblock %}` o un bloque específico para el menú, como `{% block navbar %}{% endblock %}`.
+
+También, debes asegurarte de que el contexto de la solicitud (`request`) esté disponible en la plantilla. Para ello, verifica que el middleware `'django.template.context_processors.request'` esté incluido en la configuración de `TEMPLATES` en tu archivo `settings.py`:
+
+```python
+TEMPLATES = [
+    {
+        # ...
+        'OPTIONS': {
+            'context_processors': [
+                # ...
+                'django.template.context_processors.request',
+                # ...
+            ],
+        },
+    },
+]
+```
+
+Después de realizar estos cambios, reinicia el servidor de Django para que los cambios surtan efecto. Ahora, solo los usuarios superadmins autenticados verán la opción "Precios" en el menú.
+
+### quiero que en base a la respuesta anterior cuando ingrese como superuser pueda ver una tabla  con los usuarios agregados
+
+Para mostrar una tabla con los usuarios cuando ingreses como superusuario, debes crear una vista y una plantilla HTML para mostrar la información de los usuarios. Aquí te muestro cómo hacerlo:
+
+1. Crea una vista en `views.py` para manejar la lista de usuarios:
+```python
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import User
+
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
+def user_list(request):
+    users = User.objects.all()
+    return render(request, 'user_list.html', {'users': users})
+```
+2. Agrega la URL correspondiente a la vista en `urls.py`:
+```python
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    # ...
+    path('superadmin/usuarios/', views.user_list, name='user_list'),
+    # ...
+]
+```
+3. Crea una plantilla HTML para mostrar la tabla de usuarios en `user_list.html`:
+```html
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Lista de Usuarios</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Usuario</th>
+        <th>Correo electrónico</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+        <tr>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.first_name }}</td>
+          <td>{{ user.last_name }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}
+```
+4. Agrega un enlace en el menú del navbar para acceder a la lista de usuarios:
+```html
+{% if request.user.is_superuser %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'user_list' %}">Usuarios</a>
+  </li>
+{% endif %}
+```
+Después de realizar estos cambios, reinicia el servidor de Django para que los cambios surtan efecto. Ahora, cuando un superusuario inicie sesión, verá la opción "Usuarios" en el menú del navbar y podrá acceder a la lista de usuarios en una tabla.
